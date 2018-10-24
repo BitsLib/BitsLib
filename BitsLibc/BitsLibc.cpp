@@ -8,7 +8,7 @@ uint64_t Bits2UInt64(uint8_t *bits, int idx, int cnt)
 	assert((cnt > 0) && (cnt <= 56) && "cnt must in  (0,56]");
 	uint64_t val = 0;
 	uint8_t* pval = (uint8_t*)(&val);
-	int startIdx = idx >> 3;
+	int startIdx = idx / 8;
 	int endIdx = (int)(ceil((idx + cnt) / 8.0));
 	int byteSize = endIdx - startIdx;
 	if (IS_LITTLE_ENDIAN())
@@ -42,7 +42,7 @@ uint16_t Bits2UInt16(uint8_t*bits, int idx, int cnt)
 	uint8_t * buf = (uint8_t *)bits;
 	uint32_t val = 0;
 	uint8_t* pval = (uint8_t*)(&val);
-	int startIdx = idx >> 3;
+	int startIdx = idx / 8 ;
 	int endIdx = (int)(ceil((idx + cnt) / 8.0));
 	int byteSize = endIdx - startIdx;
 	if (IS_LITTLE_ENDIAN())
@@ -77,7 +77,7 @@ void BitsCopyTo(uint8_t*bits, int idx, int cnt, uint64_t value)
 	val = (val << (64 - cnt));
 	val = (val >> (idx % 8));
 	uint8_t* pval = (uint8_t*)(&val);
-	int startIdx = idx >> 3;
+	int startIdx = idx / 8;
 	int endIdx = (int)(ceil((idx + cnt) / 8.0));
 	int byteSize = endIdx - startIdx;
 
